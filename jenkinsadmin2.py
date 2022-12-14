@@ -51,7 +51,7 @@ elif action_server == "backup":
        else:
           print("Add containerID.(-c)")
     else:
-       print("Add backup_name.(-n)")
+       print("Add backup_name.(-b)")
 
 
 
