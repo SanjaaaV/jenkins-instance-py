@@ -1,11 +1,11 @@
 from api4jenkins import Jenkins
+from docker.api import container
+from configparser import ConfigParser
+from requests.auth import HTTPBasicAuth
 import sys
 import requests 
 import docker 
-from docker.api import container
-from configparser import ConfigParser
 import argparse
-from requests.auth import HTTPBasicAuth
 import time
 
 parser = argparse.ArgumentParser(description = 'Jenkins server')
@@ -17,8 +17,6 @@ parser.add_argument('-c','--container', metavar='', help='container ID.')
 args = parser.parse_args()
 
 
-
-
 config = ConfigParser()
 config.read("parametersjenkins.ini")
 
@@ -28,8 +26,8 @@ usernameJenkins = config_data['usernamejenkins']
 passwordJenkins = config_data['passwordjenkins']
 url_projects = config_data['url_projects']
 
+#jenkins and docker connection
 server = Jenkins(hostJenkins, auth=(usernameJenkins,passwordJenkins))
-
 client = docker.from_env()
 
 
@@ -44,6 +42,7 @@ def serverstatus():
       return("up")
     else:
       return("down")
+
 def stopserver():
     server.system.quiet_down()
     print("Jenkins instance was stopped.")
@@ -56,6 +55,15 @@ def startserver():
     print("Jenkins instance was started.")
     response = serverstatus()
     return response
+
+'''def backupstatus(nameB):
+   print (client.images.list())
+   listImages = client.images.list()
+   imageB = f"{nameB}:latest"
+   print (imageB)
+   ????if imageB in listImages:
+      print("Image created.")????
+   print (type(client.images.list()))'''
 
 
 
@@ -74,6 +82,7 @@ elif action_server == "backup":
           nameB = args.backup_name
           container.commit(nameB)
           print("Jenkins instance backup was made.")
+          #backupstatus(nameB)
        else:
           print("Add containerID.(-c)")
     else:
