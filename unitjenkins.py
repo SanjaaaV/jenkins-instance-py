@@ -2,12 +2,16 @@ import unittest
 import jenkinsadmin2
 
 class TestJenkinsServer(unittest.TestCase):
-    def test_server_stop(self):
-        result = jenkinsadmin2.stopserver()
+    def test_server_stop(self): 
+        result =jenkinsadmin2.stopserver()
         self.assertEqual(result, 'down')
+
     def test_server_start(self):
         result = jenkinsadmin2.startserver()
         self.assertEqual(result, 'up')
+    
+    def start_server():
+        jenkinsadmin2.startserver()
     
 
 class TestJenkinsJobs(unittest.TestCase):
@@ -16,10 +20,16 @@ class TestJenkinsJobs(unittest.TestCase):
         r = jenkinsadmin2.startserver
         if r == 'up':
             result = jenkinsadmin2.job_action('maven2','build')
-            print(result)
-            lastbuild = jenkinsadmin2.server.get_job('maven2').get_last_build()
-            print(lastbuild)
-            self.assertEqual(result, lastbuild)
+            self.assertEqual(result, 'True')
+
+
+    def test_job_stop(self):
+        r = jenkinsadmin2.startserver
+        if r == 'up':
+            job_action('maven2','build')
+            result = jenkinsadmin2.job_action('maven2','stop')
+            self.assertEqual(result, 'False')
+            
         
 
 if __name__ == '__main__':

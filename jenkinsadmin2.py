@@ -93,16 +93,24 @@ def build(job_name):
    while not item.get_build():
      time.sleep(1)   
    build = item.get_build()
-   #print(f"Job-build.{build}")
-   return(build)
+   print(f"Job-build.{build}")
+   print(build.building)
+   return(build.building)
    
 
 def stop_build(job_name):
    job = server.get_job(job_name)
    build = job.get_last_build()
    print (build)
-   build.stop()
-   return (build)
+   if build.building:
+      build.stop()
+      while build.building:
+         time.sleep(1)
+      print (build.building)
+      return (build.building)
+   else:
+      print("The build is alredy finished.")
+      print(build.building)
    
 
 def job_action(job_name, action_job):
@@ -134,6 +142,12 @@ if action_job:
    if status == 'up':
       job_action(job_name,action_job)
    else:
-      print("Server is down. (-s start)" )
+      print('Server is down, wait to start server...')
+      startserver()
+      status = serverstatus()
+      while status == 'down':
+         time.sleep(1)
+         status = serverstatus()
+      job_action(job_name,action_job)
 
 
