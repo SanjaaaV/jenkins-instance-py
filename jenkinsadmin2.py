@@ -45,26 +45,24 @@ def serverstatus():
 
 def stopserver():
     server.system.quiet_down()
-    print("Jenkins instance was stopped.")
+    print("Jenkins instance-stopped.")
     serverstatus()
     response = serverstatus()
     return response
 
 def startserver():
     server.system.cancel_quiet_down()
-    print("Jenkins instance was started.")
+    print("Jenkins instance-started.")
     response = serverstatus()
     return response
 
-'''def backupstatus(nameB):
-   print (client.images.list())
-   listImages = client.images.list()
-   imageB = f"{nameB}:latest"
-   print (imageB)
-   ????if imageB in listImages:
-      print("Image created.")????
-   print (type(client.images.list()))'''
-
+def backupserver(nameB, container):
+   IDcontainer = container
+   container = client.containers.get(IDcontainer)
+   container.commit(nameB)
+   print("Jenkins instance backup-created.")
+   imageB = client.images.get(nameB)
+   return imageB
 
 
 action_server = args.action_server
@@ -78,11 +76,8 @@ elif action_server == "backup":
     if args.backup_name:
        if args.container:
           IDcontainer = args.container
-          container = client.containers.get(IDcontainer)
           nameB = args.backup_name
-          container.commit(nameB)
-          print("Jenkins instance backup was made.")
-          #backupstatus(nameB)
+          backupserver(nameB, IDcontainer)
        else:
           print("Add containerID.(-c)")
     else:
@@ -102,8 +97,8 @@ def build(job_name):
    while not item.get_build():
      time.sleep(1)   
    build = item.get_build()
-   print(f"Job-build.{build}")
-   print(build.building)
+   print(build)
+   print("Job-building.")
    return(build.building)
    
 
@@ -115,11 +110,10 @@ def stop_build(job_name):
       build.stop()
       while build.building:
          time.sleep(1)
-      print (build.building)
+      print("Job-stopped.")
       return (build.building)
    else:
       print("The build is alredy finished.")
-      print(build.building)
    
 
 def job_action(job_name, action_job):
@@ -151,7 +145,7 @@ if action_job:
    if status == 'up':
       job_action(job_name,action_job)
    else:
-      print('Server is down, wait to start server...')
+      print('Server is down, wait to start Jenkins server...')
       startserver()
       status = serverstatus()
       while status == 'down':

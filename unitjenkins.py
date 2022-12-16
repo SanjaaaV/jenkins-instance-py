@@ -12,6 +12,15 @@ class TestJenkinsServer(unittest.TestCase):
     
     def start_server():
         jenkinsadmin2.startserver()
+
+    def test_server_backup(self):
+        result = jenkinsadmin2.backupserver("try", "9ae6f859ec58")
+        rstr = str(result)
+        exists = "<Image: 'try:latest'>"
+        self.assertEqual(rstr, exists)
+
+    def rm_image():
+        jenkinsadmin2.client.images.remove("try")
     
 
 class TestJenkinsJobs(unittest.TestCase):
