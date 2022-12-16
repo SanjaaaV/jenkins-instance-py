@@ -4,14 +4,13 @@ import jenkinsadmin2
 class TestJenkinsServer(unittest.TestCase):
     def test_server_stop(self): 
         result =jenkinsadmin2.stopserver()
+        jenkinsadmin2.startserver()
         self.assertEqual(result, 'down')
+
 
     def test_server_start(self):
         result = jenkinsadmin2.startserver()
         self.assertEqual(result, 'up')
-    
-    def start_server():
-        jenkinsadmin2.startserver()
 
     def test_server_backup(self):
         result = jenkinsadmin2.backupserver("try", "9ae6f859ec58")
@@ -19,8 +18,7 @@ class TestJenkinsServer(unittest.TestCase):
         exists = "<Image: 'try:latest'>"
         self.assertEqual(rstr, exists)
 
-    def rm_image():
-        jenkinsadmin2.client.images.remove("try")
+    
     
 
 class TestJenkinsJobs(unittest.TestCase):
