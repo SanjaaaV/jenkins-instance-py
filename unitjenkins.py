@@ -12,11 +12,7 @@ class TestJenkinsServer(unittest.TestCase):
         result = jenkinsadmin2.startserver()
         self.assertEqual(result, 'up')
 
-    def test_server_backup(self):
-        result = jenkinsadmin2.backupserver("try", "9ae6f859ec58")
-        rstr = str(result)
-        exists = "<Image: 'try:latest'>"
-        self.assertEqual(rstr, exists)
+    
 
     
     
