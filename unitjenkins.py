@@ -10,7 +10,7 @@ class TestJenkinsServer(unittest.TestCase):
 
     def test_server_start(self):
         result = jenkinsadmin2.startserver()
-        self.assertEqual(result, 'down')
+        self.assertEqual(result, 'up')
 
     
 
