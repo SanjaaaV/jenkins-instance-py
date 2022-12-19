@@ -28,7 +28,7 @@ url_projects = config_data['url_projects']
 
 #jenkins and docker connection
 server = Jenkins(hostJenkins, auth=(usernameJenkins,passwordJenkins))
-client = docker.from_env()
+
 
 
 
@@ -75,6 +75,7 @@ elif action_server == "start":
 elif action_server == "backup":
     if args.backup_name:
        if args.container:
+          client = docker.from_env()
           IDcontainer = args.container
           nameB = args.backup_name
           backupserver(nameB, IDcontainer)
