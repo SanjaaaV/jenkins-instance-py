@@ -3,8 +3,8 @@ node('agent1') {
         checkout scm 
     }
 
-    stage('junit'){
-        junit 'target/*/*.xml'
+    stage ('Test'){
+        sh 'python unitjenkins.py'
     }
 
     stage('finish'){
