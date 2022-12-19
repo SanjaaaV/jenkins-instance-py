@@ -3,9 +3,6 @@ node('agent1') {
         checkout scm 
     }
 
-    #stage('build') {
-        #sh "behave -i test.feature --junit"
-    #}
 
     stage('junit'){
         junit 'target/*/*.xml'
