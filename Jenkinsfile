@@ -4,7 +4,7 @@ node('agent1') {
     }
 
     stage ('Test'){
-        sh 'python unitjenkins.py'
+        sh 'python3 unitjenkins.py'
     }
 
     stage('finish'){
