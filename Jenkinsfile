@@ -10,6 +10,15 @@ pipeline {
         }
     }
 
+    post {
+         failure {
+            updateGitlabCommitStatus name: 'build', state: 'failure' 
+        }
+         success {
+            updateGitlabCommitStatus name: 'build', state: 'success'
+        }
+    }
+
 }
 
 
