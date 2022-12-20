@@ -10,6 +10,7 @@ pipeline {
         }
     }
 
+
     post {
          failure {
             updateGitlabCommitStatus name: 'build', state: 'failed' 
@@ -22,9 +23,7 @@ pipeline {
         gitLabConnection('jenadmin')
     }
     triggers {
-
-        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: ‘All’)
-
+        gitlab(triggerOnPush: true, triggerOnMergeRequest: true)
     }
 
 }
