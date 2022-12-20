@@ -18,6 +18,14 @@ pipeline {
             updateGitlabCommitStatus name: 'build', state: 'success'
         }
     }
+    options {
+        gitLabConnection('jenadmin')
+    }
+    triggers {
+
+        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: ‘All’)
+
+    }
 
 }
 
