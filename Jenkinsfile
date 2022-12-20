@@ -19,13 +19,13 @@ pipeline {
 
     post {
          failure {
-            gitlabCommitStatus {
+            gitLabCommitStatus {
                 name = 'Test'
                 state = 'failed' 
             }
         }
          success {
-            gitlabCommitStatus {
+            gitLabCommitStatus {
                 name = 'Test'
                 state = 'success'
             }
