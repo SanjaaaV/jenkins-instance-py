@@ -18,11 +18,8 @@ pipeline {
 
 
     post {
-         failure {
-            updateGitlabCommitStatus name: 'Test', state: 'failed' 
-        }
          success {
-            updateGitlabCommitStatus name: 'Test', state: 'success'
+            AddGitlabMRComment comment: 'Test'
         }
     }
     
