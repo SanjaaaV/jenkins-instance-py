@@ -1,11 +1,13 @@
-node('agent1') {
-    stage("checkout") {
-        checkout scm 
+pipeline {
+    agent 'agent1'
+    stages {
+        stage('Test') {
+            steps {
+                sh 'python3 unitjenkins.py'
+            }
+        }
     }
 
-    stage ('Test'){
-        sh 'python3 unitjenkins.py'
-    }
     post ('finish'){
             failure {
 
@@ -24,6 +26,6 @@ node('agent1') {
             }
     }
 
-
-
 }
+
+
