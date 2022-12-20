@@ -10,7 +10,7 @@ node('agent1') {
             failure {
 
                 gitlabCommitStatus(connection: gitLabConnection(gitLabConnection: 'jenadmin', jobCredentialId: '')) {
-                    name: ‘build’, state: ‘failed’
+                   state: ‘failed’
                 } 
 
             }
@@ -18,7 +18,7 @@ node('agent1') {
             success {
 
                 gitlabCommitStatus(connection: gitLabConnection(gitLabConnection: 'jenadmin', jobCredentialId: '')) {
-                    name: ‘build’, state: ‘success’
+                    state: ‘success’
                 }
 
             }
