@@ -2,6 +2,12 @@ pipeline {
     agent {
         label 'agent1'
     }
+    options {
+        gitLabConnection('jenadmin')
+    }
+    triggers {
+        gitlab(triggerOnPush: true, triggerOnMergeRequest: true)
+    }
     stages {
         stage('Test') {
             steps {
@@ -19,12 +25,7 @@ pipeline {
             updateGitlabCommitStatus name: 'build', state: 'success'
         }
     }
-    options {
-        gitLabConnection('jenadmin')
-    }
-    triggers {
-        gitlab(triggerOnPush: true, triggerOnMergeRequest: true)
-    }
+    
 
 }
 
