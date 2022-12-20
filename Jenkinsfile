@@ -2,12 +2,7 @@ pipeline {
     agent {
         label 'agent1'
     }
-    options {
-        gitLabConnection('jenadmin')
-    }
-    triggers {
-        gitlab(triggerOnPush: true, triggerOnMergeRequest: true)
-    }
+    
     stages {
         stage('Test') {
             steps {
@@ -19,7 +14,7 @@ pipeline {
 
     post {
          success {
-            AddGitlabMRComment comment: 'Test'
+            addGitlabMRComment comment: 'Test'
         }
     }
     
