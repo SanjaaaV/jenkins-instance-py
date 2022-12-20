@@ -1,5 +1,5 @@
 pipeline {
-    agent 'agent1'
+    agent {agent1}
     stages {
         stage('Test') {
             steps {
@@ -9,23 +9,6 @@ pipeline {
     }
 
 
-    post ('finish'){
-            failure {
-
-                gitlabCommitStatus(connection: gitLabConnection(gitLabConnection: 'jenadmin', jobCredentialId: '')) {
-                   state: ‘failed’
-                } 
-
-            }
-
-            success {
-
-                gitlabCommitStatus(connection: gitLabConnection(gitLabConnection: 'jenadmin', jobCredentialId: '')) {
-                    state: ‘success’
-                }
-
-            }
-    }
 
 }
 
