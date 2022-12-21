@@ -20,13 +20,13 @@ args = parser.parse_args()
 config = ConfigParser()
 config.read("parametersjenkins.ini")
 
+#jenkins connection
 config_data = config["JENKINS"]
 hostJenkins = config_data['hostjenkins']
 usernameJenkins = config_data['usernamejenkins']
 passwordJenkins = config_data['passwordjenkins']
 url_projects = config_data['url_projects']
 
-#jenkins and docker connection
 server = Jenkins(hostJenkins, auth=(usernameJenkins,passwordJenkins))
 
 
@@ -60,7 +60,7 @@ def backupserver(nameB, container):
    IDcontainer = container
    container = client.containers.get(IDcontainer)
    container.commit(nameB)
-   print("Jenkins instance backup-created.")
+   print("Jenkins instance-backup created.")
    imageB = client.images.get(nameB)
    return imageB
 

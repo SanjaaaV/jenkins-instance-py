@@ -14,8 +14,6 @@ class TestJenkinsServer(unittest.TestCase):
 
     
 
-    
-    
 
 class TestJenkinsJobs(unittest.TestCase):
 
