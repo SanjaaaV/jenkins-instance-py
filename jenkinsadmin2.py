@@ -67,7 +67,7 @@ def backupserver(name_b, container):
     container = client.containers.get(id_container)
     container.commit(name_b)
     print("Jenkins instance-backup created.")
-    imageB = client.images.get(name_b)
+    image_b = client.images.get(name_b)
     return image_b
 
 
